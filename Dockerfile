@@ -6,8 +6,9 @@ FROM golang:1.20-alpine
 WORKDIR /app
 
 # Download Go modules
-COPY * ./
+COPY . .
 RUN go mod download
+RUN go get -u github.com/gin-gonic/gin
 
 # Copy the source code. Note the slash at the end, as explained in
 # https://docs.docker.com/engine/reference/builder/#copy
