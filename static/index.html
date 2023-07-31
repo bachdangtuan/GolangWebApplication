@@ -15,33 +15,53 @@
 <body class="bg-light">
 
     <div class="d-flex justify-content-center bg-primary">
-        <h2 class="text-uppercase text-white">Ứng dụng giải phương trình bậc 2</h2>
+        <h1 class="text-uppercase text-white">DEMO GOLANG APP</h1>
     </div>
 
     <div class="w-75 d-flex justify-content-center m-auto align-items-center text-center">
-        <p style="font-size: 100px;">{[{.strucdemo}]}</p>
+        <p style="font-size: 70px;">{[{.strucdemo}]}</p>
     </div>
 
-    <div class="container">
-        <form action="/giai-phuong-trinh" method="post" name="inputForm">
-            <div class="mb-3 d-flex">
-                <input class="col-1" type="number" name="x" id="x" required>
-                <h1>x<sup>2</sup></h1>
-                <h1 class="ml-2 mr-3"> - </h1>
-                <input class="col-1" type="number" name="y" id="y" required>
-                <h1> y</h1>
-                <h1 class="ml-2 mr-3"> + </h1>
-                <input class="col-1" type="number" name="z" id="z" required>
-                <h1 class="ml-2 mr-3"> = </h1>
-                <h1> 0</h1>
-            </div>
-        <hr></hr>
-        <h2>Tính toán giải phương trình bậc 2</h2>
-        <hr></hr>
-            <button type="submit" class="btn btn-primary">Submit</button>
-        </form>
-        <h1>Hello, {{ strucdemo }}!</h1>
-        
+    <div
+        style="background-image: url('https://images.tutorialedge.net/cards/course/golang/card.png'); background-repeat: no-repeat; background-position: center center; ">
+        <div class="container">
+            <form action="/giai-phuong-trinh" method="post" name="inputForm">
+                <div class="mb-3 d-flex">
+                    <input class="col-1" type="number" name="x" id="x" required>
+                    <h1>x<sup>2</sup></h1>
+                    <h1 class="ml-2 mr-3"> - </h1>
+                    <input class="col-1" type="number" name="y" id="y" required>
+                    <h1> y</h1>
+                    <h1 class="ml-2 mr-3"> + </h1>
+                    <input class="col-1" type="number" name="z" id="z" required>
+                    <h1 class="ml-2 mr-3"> = </h1>
+                    <h1> 0</h1>
+                </div>
+                <hr>
+                </hr>
+                <h3>Công thức tính
+                    Δ = b<sup>2</sup> – 4ac
+                </h3>
+                <h3>Các trường hợp của delta
+                    <li>Nếu Δ < 0 thì phương trình bậc 2 vô nghiệm.</li>
+                    <li>Nếu Δ > 0 thì phương trình có 2 nghiệm.</li>
+                    <li>Nếu Δ = 0 thì phương trình bậc vô nghiệm.</li>
+                </h3>
+                <hr>
+                </hr>
+                <button type="submit" class="btn m-4 p-2 btn-danger">
+                    <h2>
+                        Tính toán
+                    </h2>
+                </button>
+            </form>
+            <h1>Δ là: {[{.delta}]} </h1>
+            <h1>Phương trình có: {[{.nghiem}]}</h1>
+            <hr>
+            <h2>Kết quả x là: {[{.nghiem1}]}</h2>
+            <h2>Kết quả y là: {[{.nghiem2}]}</h2>
+
+        </div>
     </div>
 
 

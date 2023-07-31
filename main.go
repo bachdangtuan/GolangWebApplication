@@ -16,27 +16,32 @@ func formatAsDate(t time.Time) string {
 	return fmt.Sprintf("%d/%02d/%02d", year, month, day)
 }
 
+// Variable
+
+var DetailNghiem string
+
+var ketQua []any
+
 func PhuongTrinhBac2(delta float64, x float64, y float64, z float64) {
 
 	fmt.Println("Giá trị delta là:", delta)
 
-	type nghiem struct {
-		x1 float64
-		x2 float64
-	}
-
 	if delta < 0 {
 		fmt.Println("Phương trình vô nghiệm")
+		ketQua = []any{
+			"vô nghiệm",
+			"vô nghiệm",
+		}
 	} else if delta > 0 {
-		ketQua := nghiem{
-			x1: (-(y) + math.Sqrt(delta)) / 2 * x,
-			x2: (-(y) - math.Sqrt(delta)) / 2 * x,
+		ketQua = []any{
+			(-(y) + math.Sqrt(delta)) / 2 * x,
+			(-(y) - math.Sqrt(delta)) / 2 * x,
 		}
 		fmt.Println("Phương trình có 2 nghiệm là ", ketQua)
 	} else {
-		ketQua := nghiem{
-			x1: -(y) / 2 * x,
-			x2: -(y) / 2 * x,
+		ketQua = []any{
+			-(y) / 2 * x,
+			-(y) / 2 * x,
 		}
 		fmt.Println("Phương trình có nghiệm kép", ketQua)
 	}
@@ -51,7 +56,7 @@ func tinhDelta(a float64, b float64, c float64) float64 {
 }
 
 func fetchUsers() string {
-	data := "Demo"
+	data := "GIẢI PHƯƠNG TRÌNH BẬC 2"
 	return data
 }
 
@@ -103,15 +108,24 @@ func main() {
 		fmt.Println(cacThamSo)
 		delta := tinhDelta(cacThamSo.x, cacThamSo.y, cacThamSo.z)
 
+		if delta < 0 {
+			DetailNghiem = "Vô Nghiệm"
+		} else if delta > 0 {
+			DetailNghiem = "Hai Nghiệm"
+		} else {
+			DetailNghiem = "Nghiệm kép"
+		}
+
 		PhuongTrinhBac2(delta, cacThamSo.x, cacThamSo.y, cacThamSo.z)
 
-		fmt.Println(delta)
-		// c.JSON(200, gin.H{
-		// 	"status":  "posted to login",
-		// 	"message": "whoo",
-		// 	"form":    formContent})
+		fmt.Println("Kết quả nghiệm là:", ketQua)
+
 		c.HTML(http.StatusOK, "index.html", map[string]interface{}{
 			"strucdemo": fetchUsers(),
+			"delta":     tinhDelta(cacThamSo.x, cacThamSo.y, cacThamSo.z),
+			"nghiem":    DetailNghiem,
+			"nghiem1":   ketQua[0],
+			"nghiem2":   ketQua[1],
 		})
 	})
 
