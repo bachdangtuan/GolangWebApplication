@@ -75,8 +75,6 @@ var (
 
 func main() {
 
-	prometheus.MustRegister(requestTotal)
-	http.Handle("/metrics", promhttp.Handler())
 
 	router := gin.Default()
 	router.Delims("{[{", "}]}")
@@ -90,6 +88,10 @@ func main() {
 			"strucdemo": fetchUsers(),
 		})
 	})
+	prometheus.MustRegister(requestTotal)
+	router.GET("/metrics", promhttp.Handler())
+
+	
 
 	router.POST("/giai-phuong-trinh", func(c *gin.Context) {
 
