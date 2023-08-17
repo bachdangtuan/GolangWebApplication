@@ -10,6 +10,7 @@ import (
 	"github.com/gin-gonic/gin"
 	"github.com/prometheus/client_golang/prometheus"
     "github.com/prometheus/client_golang/prometheus/promhttp"
+	"github.com/prometheus/client_golang/prometheus/promauto"
 )
 
 func formatAsDate(t time.Time) string {
@@ -63,13 +64,10 @@ func fetchUsers() string {
 
 
 var (
-    requestTotal = prometheus.NewCounterVec(
-        prometheus.CounterOpts{
-            Name: "kiem_tra_request_api",
-            Help: "Total number of HTTP requests.",
-        },
-        []string{"method"},
-    )
+    requestTotal = promauto.NewGauge(prometheus.GaugeOpts{
+		Name: "request_api_demo",
+		Help: "Number of application requests in progress",
+	})
 )
 
 
