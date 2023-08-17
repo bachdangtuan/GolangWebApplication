@@ -89,9 +89,12 @@ func main() {
 		})
 	})
 	prometheus.MustRegister(requestTotal)
-	router.GET("/metrics", gin.WrapH(promhttp.Handler()))
 	
-
+	router.GET("/metrics", func(c *gin.Context) {
+		h := promhttp.Handler()
+		h.ServeHTTP(c.Writer, c.Request)
+	})
+	
 	router.POST("/giai-phuong-trinh", func(c *gin.Context) {
 
 		type ThamSo struct {
