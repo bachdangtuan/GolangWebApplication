@@ -7,8 +7,9 @@ import (
 	"net/http"
 	"strconv"
 	"time"
-
 	"github.com/gin-gonic/gin"
+	"github.com/prometheus/client_golang/prometheus"
+    "github.com/prometheus/client_golang/prometheus/promhttp"
 )
 
 func formatAsDate(t time.Time) string {
@@ -60,7 +61,23 @@ func fetchUsers() string {
 	return data
 }
 
+
+var (
+    requestTotal = prometheus.NewCounterVec(
+        prometheus.CounterOpts{
+            Name: "kiem_tra_request_api",
+            Help: "Total number of HTTP requests.",
+        },
+        []string{"method"},
+    )
+)
+
+
 func main() {
+
+	prometheus.MustRegister(requestTotal)
+	http.Handle("/metrics", promhttp.Handler())
+
 	router := gin.Default()
 	router.Delims("{[{", "}]}")
 	router.SetFuncMap(template.FuncMap{
