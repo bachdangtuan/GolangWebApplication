@@ -90,7 +90,7 @@ func main() {
 			"strucdemo": fetchUsers(),
 		})
 	})
-	prometheus.MustRegister(requestTotal)
+	// prometheus.MustRegister(requestTotal)
 	
 	router.GET("/metrics", func(c *gin.Context) {
 		h := promhttp.Handler()
