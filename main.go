@@ -89,8 +89,7 @@ func main() {
 		})
 	})
 	prometheus.MustRegister(requestTotal)
-	router.GET("/metrics", promhttp.Handler())
-
+	router.GET("/metrics", gin.WrapH(promhttp.Handler()))
 	
 
 	router.POST("/giai-phuong-trinh", func(c *gin.Context) {
